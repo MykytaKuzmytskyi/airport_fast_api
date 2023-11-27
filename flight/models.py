@@ -22,7 +22,7 @@ flight_crew = Table(
 class Crew(Base):
     __tablename__ = "crew"
 
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(Integer, primary_key=True, index=True, unique=True)
     first_name = Column(String(255))
     last_name = Column(String(255))
 
@@ -39,7 +39,7 @@ class Crew(Base):
 class Flight(Base):
     __tablename__ = "flight"
 
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(Integer, primary_key=True, index=True, unique=True)
     route_id = Column(Integer, ForeignKey("route.id"))
     aircraft_code = Column(
         String(10), ForeignKey("aircraft.aircraft_code"), primary_key=True

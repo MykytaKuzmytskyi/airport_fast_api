@@ -1,8 +1,8 @@
 """Initialize migration
 
-Revision ID: 81f2fd68b823
+Revision ID: 30424616782f
 Revises: 
-Create Date: 2023-11-27 01:46:16.491525
+Create Date: 2023-11-27 03:11:56.344823
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = '81f2fd68b823'
+revision: str = '30424616782f'
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -42,7 +42,7 @@ def upgrade() -> None:
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('first_name', 'last_name', name='unique_crew_first_name_last_name')
     )
-    op.create_index(op.f('ix_crew_id'), 'crew', ['id'], unique=False)
+    op.create_index(op.f('ix_crew_id'), 'crew', ['id'], unique=True)
     op.create_table('user',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('email', sa.String(length=320), nullable=False),
@@ -95,7 +95,7 @@ def upgrade() -> None:
     sa.ForeignKeyConstraint(['route_id'], ['route.id'], ),
     sa.PrimaryKeyConstraint('id', 'aircraft_code')
     )
-    op.create_index(op.f('ix_flight_id'), 'flight', ['id'], unique=False)
+    op.create_index(op.f('ix_flight_id'), 'flight', ['id'], unique=True)
     op.create_table('flight_crew',
     sa.Column('flight_id', sa.Integer(), nullable=True),
     sa.Column('crew_id', sa.Integer(), nullable=True),
